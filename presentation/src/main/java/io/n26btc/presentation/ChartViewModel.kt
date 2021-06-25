@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ChartViewModel(
-  private val chartType: String,
+  chartType: String,
   private val getBitcoinChartUseCase: GetBitcoinChartUseCase
 ) : BaseViewModel() {
 

@@ -58,4 +58,10 @@ dependencies {
   implementation"com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
   implementation"org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1"
 
+  // test
+  testImplementation "junit:junit:$junit_version"
+  testImplementation "io.mockk:mockk:$mockk_version"
+  testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_test_version"
+  testImplementation("org.mockito:mockito-core:3.6.28")
+
 }

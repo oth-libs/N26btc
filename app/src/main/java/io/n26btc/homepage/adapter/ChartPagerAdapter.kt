@@ -13,7 +13,7 @@ class ChartPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
   override fun createFragment(position: Int): Fragment {
     val fragment = ChartFragment()
     fragment.arguments = Bundle().apply {
-      putString("blaa", BitcoinChartType.values()[position].name)
+      putString("blaa", BitcoinChartType.values()[position].name) //todo
     }
     return fragment
   }

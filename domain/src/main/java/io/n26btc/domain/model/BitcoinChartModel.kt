@@ -1,7 +1,7 @@
 package io.n26btc.domain.model
 
 data class BitcoinChartModel(
-  val unit: String?,
+  val currency: String?,
   val values: List<BitcoinChartValue>?
 )
 

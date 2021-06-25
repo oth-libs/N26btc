@@ -13,7 +13,7 @@ internal class BitcoinChartDataMapper : Mapper<BitcoinChartRetrofit, BitcoinChar
   override fun map(from: BitcoinChartRetrofit): BitcoinChartModel {
     return from.run {
       BitcoinChartModel(
-        unit = unit,
+        currency = unit,
         values = mapValues(values)
       )
     }

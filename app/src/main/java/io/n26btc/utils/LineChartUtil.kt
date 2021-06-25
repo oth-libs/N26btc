@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.MotionEvent
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -13,6 +12,8 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import io.n26btc.R
 import io.n26btc.domain.model.BitcoinChartModel
+import io.n26btc.extensions.formatDate
+import java.util.Calendar
 
 object LineChartUtil {
 
@@ -28,6 +29,8 @@ object LineChartUtil {
 
   fun LineChart.updateChartData(bitcoinChartModel: BitcoinChartModel) {
     val entries = mutableListOf<Entry>()
+
+    setValueFormatters(bitcoinChartModel.currency)
 
     bitcoinChartModel.values?.forEach {
       entries.add(Entry(it.x?.toFloat() ?: 0F, it.y?.toFloat() ?: 0F))
@@ -110,7 +113,6 @@ object LineChartUtil {
     xAxis.apply {
       setDrawLabels(true)
       position = XAxis.XAxisPosition.BOTTOM
-      valueFormatter = DateAxisValueFormatter()
       textColor = ContextCompat.getColor(context, R.color.text_color_main)
       labelRotationAngle = -56f
     }
@@ -118,10 +120,14 @@ object LineChartUtil {
     axisRight.apply {
       setDrawLabels(true)
       textColor = ContextCompat.getColor(context, R.color.text_color_main)
-      valueFormatter = AmountAxisValueFormatter()
     }
 
     axisLeft.setDrawLabels(false)
+  }
+
+  private fun LineChart.setValueFormatters(currency: String?) {
+    xAxis.valueFormatter = DateAxisValueFormatter()
+    axisRight.valueFormatter = AmountAxisValueFormatter(currency)
   }
 
   private fun LineChart.disableMisc() {
@@ -137,14 +143,14 @@ object LineChartUtil {
   }
 
   class DateAxisValueFormatter : ValueFormatter() {
-    override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-      return "Calendar.getInstance()"//.apply { timeInMillis = value.toLong() }.formatDate()
+    override fun getFormattedValue(value: Float): String {
+      return Calendar.getInstance().apply { timeInMillis = value.toLong() * 1000 }.formatDate()
     }
   }
 
-  class AmountAxisValueFormatter : ValueFormatter() {
-    override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-      return "value.prettyCount()"
+  class AmountAxisValueFormatter(private val currency: String?) : ValueFormatter() {
+    override fun getFormattedValue(value: Float): String {
+      return Utils.formatAmountWithCurrency(value.toDouble(), currency)
     }
   }
 
