@@ -5,6 +5,10 @@
   <string name="timespan_60days">60 days</string>
   <string name="timespan_1year">1 year</string>
 
+  <string name="chart_type_circulating_supply">Circulating supply</string>
+  <string name="chart_type_market_price">Market price</string>
+  <string name="chart_type_market_cap">Market cap</string>
+
   <string name="error_internet">Please check your internet connection</string>
   <string name="error_generic">An error occurred, please try again</string>
   <string name="retry">Retry</string>

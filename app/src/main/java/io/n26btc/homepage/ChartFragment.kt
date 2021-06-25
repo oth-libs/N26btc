@@ -40,12 +40,12 @@ class ChartFragment : BaseFragment<FragmentChartBinding>(
   }
 
   private fun setupViews() {
-    binding.chartCirculatingSupplyView.chart.setupLineChart()
+    binding.chart.setupLineChart()
   }
 
   private fun observeViewModelCalls() {
     viewModel.chartData.observe(viewLifecycleOwner, ::onNewCirculatingSupplyData)
   }
 
-  private fun onNewCirculatingSupplyData(bitcoinChartModel: BitcoinChartModel) = run { binding.chartCirculatingSupplyView.chart.updateChartData(bitcoinChartModel) }
+  private fun onNewCirculatingSupplyData(bitcoinChartModel: BitcoinChartModel) = run { binding.chart.updateChartData(bitcoinChartModel) }
 }
