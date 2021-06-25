@@ -1,4 +1,4 @@
-package io.n26btc.homepage
+package io.n26btc.utils
 
 import io.n26btc.domain.model.BitcoinChartTimeSpan
 

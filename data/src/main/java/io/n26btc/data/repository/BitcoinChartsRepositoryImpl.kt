@@ -7,7 +7,7 @@ import io.n26btc.data.mapper.Mapper
 import io.n26btc.data.model.BitcoinChartRetrofit
 import io.n26btc.domain.datasource.DataSourceResultHolder
 import io.n26btc.domain.model.BitcoinChartModel
-import io.n26btc.domain.model.BitcoinChartType
+import io.n26btc.domain.model.BitcoinChartRequest
 import io.n26btc.domain.repository.BitcoinChartsRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -16,14 +16,14 @@ internal class BitcoinChartsRepositoryImpl(
   private val mapperBitcoinChartRetrofitToModel: Mapper<BitcoinChartRetrofit, BitcoinChartModel>
 ) : BitcoinChartsRepository {
 
-  override fun getBitcoinChart(bitcoinChartType: BitcoinChartType): Flow<DataSourceResultHolder<BitcoinChartModel>> {
+  override fun getBitcoinChart(bitcoinChartRequest: BitcoinChartRequest): Flow<DataSourceResultHolder<BitcoinChartModel>> {
     return resultFlow(
       networkCall = {
         getResult(
           call = {
             bitcoinChartService.getBitcoinChart(
-              bitcoinChartType.name,
-              bitcoinChartType.bitcoinChartTimeSpan.value
+              bitcoinChartRequest.bitcoinChartType.value,
+              bitcoinChartRequest.bitcoinChartTimeSpan.value
             )
           },
           transform = { mapperBitcoinChartRetrofitToModel.map(it) }

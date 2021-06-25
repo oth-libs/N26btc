@@ -1,5 +1,6 @@
 package io.n26btc.presentation.di
 
+import io.n26btc.presentation.ChartViewModel
 import io.n26btc.presentation.HomePageViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
@@ -9,7 +10,8 @@ object PresentationModule {
 
   fun load() {
     loadKoinModules(module {
-      viewModel { HomePageViewModel(getBitcoinChartUseCase = get(), application = get()) }
+      viewModel { HomePageViewModel() }
+      viewModel { (chartType: String) -> ChartViewModel(chartType = chartType, getBitcoinChartUseCase = get()) }
     })
   }
 }

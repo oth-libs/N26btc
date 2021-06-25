@@ -10,7 +10,7 @@
 
     <variable
         name="timeSpanOnClick"
-        type="io.n26btc.homepage.TimeSpanOnClick" />
+        type="io.n26btc.utils.TimeSpanOnClick" />
 
     <variable
         name="bitcoinChartTimeSpan"
