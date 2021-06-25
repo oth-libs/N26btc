@@ -1,0 +1,5 @@
+rootProject.name = "N26btc"
+include ':app'
+include ':domain'
+include ':data'
+include ':presentation'

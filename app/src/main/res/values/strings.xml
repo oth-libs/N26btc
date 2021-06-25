@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">N26btc</string>
+
+  <string name="timespan_30days">30 days</string>
+  <string name="timespan_60days">60 days</string>
+  <string name="timespan_1year">1 year</string>
+</resources>

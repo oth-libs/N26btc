@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <import type="io.n26btc.domain.model.BitcoinChartTimeSpan" />
+
+    <import type="io.n26btc.domain.datasource.DataSourceResultHolder.Status" />
+
+    <variable
+        name="timeSpanOnClick"
+        type="io.n26btc.homepage.TimeSpanOnClick" />
+
+    <variable
+        name="bitcoinChartTimeSpan"
+        type="BitcoinChartTimeSpan" />
+
+    <variable
+        name="apiStatus"
+        type="Status" />
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/default_margin"
+      android:background="@color/color_screen_bg_lighter"
+      android:padding="@dimen/default_margin">
+
+    <Button
+        android:id="@+id/btn30days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@drawable/timespan_button_color_selector"
+        android:onClick="@{() -> timeSpanOnClick.onClick(BitcoinChartTimeSpan.DAYS30)}"
+        android:text="@string/timespan_30days"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:selected="@{bitcoinChartTimeSpan == BitcoinChartTimeSpan.DAYS30}" />
+
+    <Button
+        android:id="@+id/btn60days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:backgroundTint="@drawable/timespan_button_color_selector"
+        android:onClick="@{() -> timeSpanOnClick.onClick(BitcoinChartTimeSpan.DAYS60)}"
+        android:text="@string/timespan_60days"
+        app:layout_constraintStart_toEndOf="@id/btn30days"
+        app:layout_constraintTop_toTopOf="@id/btn30days"
+        app:selected="@{bitcoinChartTimeSpan == BitcoinChartTimeSpan.DAYS60}" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:backgroundTint="@drawable/timespan_button_color_selector"
+        android:onClick="@{() -> timeSpanOnClick.onClick(BitcoinChartTimeSpan.YEARS1)}"
+        android:text="@string/timespan_1year"
+        app:layout_constraintStart_toEndOf="@id/btn60days"
+        app:layout_constraintTop_toTopOf="@id/btn30days"
+        app:selected="@{bitcoinChartTimeSpan == BitcoinChartTimeSpan.YEARS1}" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="@dimen/default_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn30days" />
+
+    <include
+        layout="@layout/view_chart_loading"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/chart"
+        app:layout_constraintEnd_toEndOf="@id/chart"
+        app:layout_constraintStart_toStartOf="@id/chart"
+        app:layout_constraintTop_toTopOf="@id/chart"
+        app:visible="@{apiStatus == Status.IN_PROGRESS}" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

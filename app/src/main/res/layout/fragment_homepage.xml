@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <import type="io.n26btc.domain.model.BitcoinChartTimeSpan" />
+
+    <import type="io.n26btc.domain.datasource.DataSourceResultHolder.Status" />
+
+    <variable
+        name="circulatingSupplyTimeSpanOnClick"
+        type="io.n26btc.homepage.TimeSpanOnClick" />
+
+    <variable
+        name="marketPriceTimeSpanOnClick"
+        type="io.n26btc.homepage.TimeSpanOnClick" />
+
+    <variable
+        name="marketCapTimeSpanOnClick"
+        type="io.n26btc.homepage.TimeSpanOnClick" />
+
+    <variable
+        name="viewModel"
+        type="io.n26btc.presentation.HomePageViewModel" />
+  </data>
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/color_screen_bg"
+      android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/default_margin"
+          android:background="@color/color_screen_bg_lighter"
+          android:padding="@dimen/default_margin">
+
+        <Button
+            android:id="@+id/btnCS30days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@drawable/timespan_button_color_selector"
+            android:onClick="@{() -> circulatingSupplyTimeSpanOnClick.onClick(BitcoinChartTimeSpan.DAYS30)}"
+            android:text="@string/timespan_30days"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:selected="@{viewModel.circulatingSupplyCurrentTimeSpan == BitcoinChartTimeSpan.DAYS30}" />
+
+        <Button
+            android:id="@+id/btnCS60days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:backgroundTint="@drawable/timespan_button_color_selector"
+            android:onClick="@{() -> circulatingSupplyTimeSpanOnClick.onClick(BitcoinChartTimeSpan.DAYS60)}"
+            android:text="@string/timespan_60days"
+            app:layout_constraintStart_toEndOf="@id/btnCS30days"
+            app:layout_constraintTop_toTopOf="@id/btnCS30days"
+            app:selected="@{viewModel.circulatingSupplyCurrentTimeSpan == BitcoinChartTimeSpan.DAYS60}" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:backgroundTint="@drawable/timespan_button_color_selector"
+            android:onClick="@{() -> circulatingSupplyTimeSpanOnClick.onClick(BitcoinChartTimeSpan.YEARS1)}"
+            android:text="@string/timespan_1year"
+            app:layout_constraintStart_toEndOf="@id/btnCS60days"
+            app:layout_constraintTop_toTopOf="@id/btnCS30days"
+            app:selected="@{viewModel.circulatingSupplyCurrentTimeSpan == BitcoinChartTimeSpan.YEARS1}" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chartCirculatingSupply"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnCS30days" />
+
+        <include
+            layout="@layout/view_chart_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/chartCirculatingSupply"
+            app:layout_constraintEnd_toEndOf="@id/chartCirculatingSupply"
+            app:layout_constraintStart_toStartOf="@id/chartCirculatingSupply"
+            app:layout_constraintTop_toTopOf="@id/chartCirculatingSupply"
+            app:visible="@{viewModel.circulatingSupplyApiStatus == Status.IN_PROGRESS}" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <include
+          android:id="@+id/chartCirculatingSupplyView"
+          layout="@layout/view_chart"
+          app:apiStatus="@{viewModel.circulatingSupplyApiStatus}"
+          app:bitcoinChartTimeSpan="@{viewModel.circulatingSupplyCurrentTimeSpan}"
+          app:timeSpanOnClick="@{circulatingSupplyTimeSpanOnClick}" />
+
+      <include
+          android:id="@+id/chartMarketPriceView"
+          layout="@layout/view_chart"
+          app:apiStatus="@{viewModel.marketPriceApiStatus}"
+          app:bitcoinChartTimeSpan="@{viewModel.marketPriceCurrentTimeSpan}"
+          app:timeSpanOnClick="@{marketPriceTimeSpanOnClick}" />
+
+      <include
+          android:id="@+id/chartMarketCapView"
+          layout="@layout/view_chart"
+          app:apiStatus="@{viewModel.marketCapApiStatus}"
+          app:bitcoinChartTimeSpan="@{viewModel.marketCapCurrentTimeSpan}"
+          app:timeSpanOnClick="@{marketCapTimeSpanOnClick}" />
+    </LinearLayout>
+  </ScrollView>
+</layout>
