@@ -2,11 +2,12 @@ package io.n26btc.homepage
 
 import android.os.Bundle
 import android.view.View
+import android.view.View.OnClickListener
 import io.n26btc.BaseFragment
 import io.n26btc.R
 import io.n26btc.databinding.FragmentChartBinding
 import io.n26btc.domain.model.BitcoinChartModel
-import io.n26btc.domain.model.BitcoinChartTimeSpan
+import io.n26btc.extensions.openWifiSettings
 import io.n26btc.presentation.ChartViewModel
 import io.n26btc.utils.LineChartUtil.setupLineChart
 import io.n26btc.utils.LineChartUtil.updateChartData
@@ -23,9 +24,11 @@ class ChartFragment : BaseFragment<FragmentChartBinding>(
   override fun setupBinding() {
     binding.viewModel = viewModel
 
-    binding.timeSpanOnClick = object : TimeSpanOnClick {
-      override fun onClick(bitcoinChartTimeSpan: BitcoinChartTimeSpan) = run { viewModel.loadCirculatingSupplyChart(bitcoinChartTimeSpan) }
-    }
+    binding.timeSpanOnClick = TimeSpanOnClick { bitcoinChartTimeSpan -> viewModel.getBitcoinChart(bitcoinChartTimeSpan) }
+
+    binding.retryOnClick = OnClickListener { viewModel.getBitcoinChart() }
+
+    binding.openSettingsOnClick = OnClickListener { requireContext().openWifiSettings() }
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

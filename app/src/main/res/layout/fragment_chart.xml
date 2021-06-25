@@ -9,6 +9,14 @@
         type="io.n26btc.utils.TimeSpanOnClick" />
 
     <variable
+        name="retryOnClick"
+        type="android.view.View.OnClickListener" />
+
+    <variable
+        name="openSettingsOnClick"
+        type="android.view.View.OnClickListener" />
+
+    <variable
         name="viewModel"
         type="io.n26btc.presentation.ChartViewModel" />
   </data>
@@ -23,6 +31,8 @@
         layout="@layout/view_chart"
         app:apiStatus="@{viewModel.chartApiStatus}"
         app:bitcoinChartTimeSpan="@{viewModel.chartCurrentTimeSpan}"
+        app:retryOnClick="@{retryOnClick}"
+        app:openSettingsOnClick="@{openSettingsOnClick}"
         app:timeSpanOnClick="@{timeSpanOnClick}" />
   </LinearLayout>
 </layout>

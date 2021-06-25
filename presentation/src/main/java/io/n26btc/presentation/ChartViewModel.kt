@@ -61,22 +61,21 @@ class ChartViewModel(
   //  \____/|___/\___|\_____\__,_|___/\___|
   //
   //Font Name: Big
-  /**
-   * Start app with loading the first page
-   */
+
   @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-  private fun loadInitialCharts() {
-
-    println("chartType $chartType")
-
-    getBitcoinCirculatingSupply()
+  private fun loadInitialChart() {
+    getBitcoinChart()
   }
 
-  private fun getBitcoinCirculatingSupply() {
+  /**
+   * get chart values according to the current [bitcoinChartRequest]
+   */
+  private fun getBitcoinChart() {
     _chartCurrentTimeSpan.value = bitcoinChartRequest.bitcoinChartTimeSpan
 
     viewModelScope.launch {
       getBitcoinChartUseCase(bitcoinChartRequest).collect {
+        // ui databinding will handle errors
         _chartApiStatus.value = it.status
 
         if (it.data != null) {
@@ -86,9 +85,12 @@ class ChartViewModel(
     }
   }
 
-  fun loadCirculatingSupplyChart(bitcoinChartTimeSpan: BitcoinChartTimeSpan? = null) {
+  /**
+   * Call this method to change the time span - when [bitcoinChartTimeSpan] is null the chart will just reload i.e. keep the same time span
+   */
+  fun getBitcoinChart(bitcoinChartTimeSpan: BitcoinChartTimeSpan? = null) {
     bitcoinChartTimeSpan?.let { bitcoinChartRequest.bitcoinChartTimeSpan = bitcoinChartTimeSpan }
-    getBitcoinCirculatingSupply()
+    getBitcoinChart()
   }
 
 }

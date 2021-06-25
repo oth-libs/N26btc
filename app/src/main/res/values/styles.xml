@@ -1,0 +1,35 @@
+<resources>
+  <!-- Base application theme. -->
+  <style name="style_11_normal">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">11sp</item>
+    <item name="android:textColor">@color/text_color_main</item>
+  </style>
+
+  <style name="style_11_medium" parent="style_11_normal">
+    <item name="android:fontFamily">sans-serif-medium</item>
+  </style>
+
+  <style name="style_12_normal">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">12sp</item>
+  </style>
+
+  <style name="style_14_normal" parent="style_11_normal">
+    <item name="android:textSize">14sp</item>
+  </style>
+
+  <style name="style_14_medium" parent="style_14_normal">
+    <item name="android:fontFamily">sans-serif-medium</item>
+  </style>
+
+  <style name="style_16_normal" parent="style_11_normal">
+    <item name="android:textSize">16sp</item>
+  </style>
+
+  <style name="style_16_medium" parent="style_16_normal">
+    <item name="android:fontFamily">sans-serif-medium</item>
+  </style>
+</resources>

@@ -13,6 +13,14 @@
         type="io.n26btc.utils.TimeSpanOnClick" />
 
     <variable
+        name="retryOnClick"
+        type="android.view.View.OnClickListener" />
+
+    <variable
+        name="openSettingsOnClick"
+        type="android.view.View.OnClickListener" />
+
+    <variable
         name="bitcoinChartTimeSpan"
         type="BitcoinChartTimeSpan" />
 
@@ -79,6 +87,29 @@
         app:layout_constraintStart_toStartOf="@id/chart"
         app:layout_constraintTop_toTopOf="@id/chart"
         app:visible="@{apiStatus == Status.IN_PROGRESS}" />
+
+    <include
+        layout="@layout/view_chart_error"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/chart"
+        app:layout_constraintEnd_toEndOf="@id/chart"
+        app:layout_constraintStart_toStartOf="@id/chart"
+        app:layout_constraintTop_toTopOf="@id/chart"
+        app:retryOnClick="@{retryOnClick}"
+        app:visible="@{apiStatus == Status.ERROR}" />
+
+    <include
+        layout="@layout/view_chart_nointernet"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/chart"
+        app:layout_constraintEnd_toEndOf="@id/chart"
+        app:layout_constraintStart_toStartOf="@id/chart"
+        app:layout_constraintTop_toTopOf="@id/chart"
+        app:retryOnClick="@{retryOnClick}"
+        app:openSettingsOnClick="@{openSettingsOnClick}"
+        app:visible="@{apiStatus == Status.NO_INTERNET}" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

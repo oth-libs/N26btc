@@ -31,25 +31,5 @@ abstract class BaseFragment<BINDING : ViewDataBinding>(
     super.onViewCreated(view, savedInstanceState)
 
     lifecycle.addObserver(viewModel)
-
-//    subscribeToNoInternetLiveData()
-//    subscribeToNoInternetLiveData()
-//    subscribeToShowMessageLiveData()
   }
-
-//  private fun subscribeToNoInternetLiveData() {
-//    viewModel.internetErrorLiveData.observe(viewLifecycleOwner, {
-//      context?.showToast(R.string.error_internet)
-//    })
-//  }
-//
-//  private fun subscribeToGenericErrorLiveDataLiveData() {
-//    viewModel.genericErrorLiveData.observe(viewLifecycleOwner, {
-//      context?.showToast(R.string.error_generic)
-//    })
-//  }
-//
-//  private fun subscribeToShowMessageLiveData() {
-//    viewModel.showMessageResId.observe(viewLifecycleOwner, { stringId -> stringId?.let { context?.showToast(it) } })
-//  }
 }
