@@ -7,7 +7,7 @@ import io.n26btc.domain.di.DomainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-@Suppress("unused")
+@Suppress("UNUSED")
 class N26btcApplication : Application() {
 
   override fun onCreate() {

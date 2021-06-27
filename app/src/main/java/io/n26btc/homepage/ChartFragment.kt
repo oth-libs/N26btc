@@ -9,6 +9,7 @@ import io.n26btc.databinding.FragmentChartBinding
 import io.n26btc.domain.model.BitcoinChartModel
 import io.n26btc.extensions.openWifiSettings
 import io.n26btc.presentation.ChartViewModel
+import io.n26btc.utils.Constants.CHART_FRAGMENT_ARG_CHART_TYPE
 import io.n26btc.utils.LineChartUtil.setupLineChart
 import io.n26btc.utils.LineChartUtil.updateChartData
 import io.n26btc.utils.TimeSpanOnClick
@@ -19,7 +20,7 @@ class ChartFragment : BaseFragment<FragmentChartBinding>(
   layoutId = R.layout.fragment_chart,
 ) {
 
-  override val viewModel: ChartViewModel by viewModel { parametersOf(arguments?.getString("blaa")) }
+  override val viewModel: ChartViewModel by viewModel { parametersOf(arguments?.getString(CHART_FRAGMENT_ARG_CHART_TYPE)) }
 
   override fun setupBinding() {
     binding.viewModel = viewModel

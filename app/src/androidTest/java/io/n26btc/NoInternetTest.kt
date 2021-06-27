@@ -11,6 +11,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import io.n26btc.domain.model.BitcoinChartType
 import io.n26btc.homepage.ChartFragment
+import io.n26btc.utils.Constants
+import io.n26btc.utils.Constants.CHART_FRAGMENT_ARG_CHART_TYPE
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -41,7 +43,7 @@ class NoInternetTest {
 
   @Test
   fun testWhenNoInternetThenShowNoInternetError() {
-    val fragmentArgs = bundleOf("blaa" to BitcoinChartType.MARKET_PRICE.name)
+    val fragmentArgs = bundleOf(CHART_FRAGMENT_ARG_CHART_TYPE to BitcoinChartType.MARKET_PRICE.name)
     val scenario = launchFragmentInContainer<ChartFragment>(fragmentArgs)
 
     // wait for networks to be disabled, then start the test
