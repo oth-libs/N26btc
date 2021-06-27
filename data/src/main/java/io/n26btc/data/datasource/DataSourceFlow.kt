@@ -11,8 +11,9 @@ import kotlinx.coroutines.flow.flow
  * [networkCall] - Calls the network and implicitly checks for internet connection and returns the result wrapped in a [DataSourceResultHolder]
  *
  * Function notify UI about:
- * [DataSourceResultHolder.Status.SUCCESS] - with data from database
+ * [DataSourceResultHolder.Status.SUCCESS]
  * [DataSourceResultHolder.Status.ERROR] - if error has occurred`
+ * [DataSourceResultHolder.Status.NO_INTERNET]
  * [DataSourceResultHolder.Status.IN_PROGRESS]
  */
 fun <API_MODEL> resultFlow(
