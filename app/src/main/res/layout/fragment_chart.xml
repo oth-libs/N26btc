@@ -61,6 +61,7 @@
           app:selected="@{viewModel.chartCurrentTimeSpan == BitcoinChartTimeSpan.DAYS60}" />
 
       <Button
+          android:id="@+id/btn1year"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="@dimen/default_margin"
@@ -80,6 +81,7 @@
           app:layout_constraintTop_toBottomOf="@id/btn30days" />
 
       <include
+          android:id="@+id/viewChartLoading"
           layout="@layout/view_chart_loading"
           android:layout_width="0dp"
           android:layout_height="0dp"
@@ -90,6 +92,7 @@
           app:visible="@{viewModel.chartApiStatus == Status.IN_PROGRESS}" />
 
       <include
+          android:id="@+id/viewChartError"
           layout="@layout/view_chart_error"
           android:layout_width="0dp"
           android:layout_height="0dp"
@@ -101,6 +104,7 @@
           app:visible="@{viewModel.chartApiStatus == Status.ERROR}" />
 
       <include
+          android:id="@+id/viewChartNoInternet"
           layout="@layout/view_chart_nointernet"
           android:layout_width="0dp"
           android:layout_height="0dp"
@@ -108,8 +112,8 @@
           app:layout_constraintEnd_toEndOf="@id/chart"
           app:layout_constraintStart_toStartOf="@id/chart"
           app:layout_constraintTop_toTopOf="@id/chart"
-          app:retryOnClick="@{retryOnClick}"
           app:openSettingsOnClick="@{openSettingsOnClick}"
+          app:retryOnClick="@{retryOnClick}"
           app:visible="@{viewModel.chartApiStatus == Status.NO_INTERNET}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

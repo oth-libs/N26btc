@@ -38,5 +38,10 @@ dependencies {
   // koin
   implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
-
+  // test
+  testImplementation "junit:junit:$junit_version"
+  testImplementation "io.mockk:mockk:$mockk_version"
+  testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_test_version"
+  testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlin_test_version"
+  testImplementation "androidx.arch.core:core-testing:$core_testing_version"
 }
